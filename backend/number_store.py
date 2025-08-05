@@ -1,5 +1,3 @@
-from fastapi import HTTPException
-
 class NumberStore:
     def __init__(self):
         self.current_number = None
