@@ -20,11 +20,20 @@ cd backend
 ```
 python -m venv .venv
 ```
-#### 2.3 `FastAPI`のインストール
+#### 2.3 Pythonの仮想環境を使用
+Windows
+```
+.\.venv\Scripts\activate
+```
+Mac or Linux
+```
+source .venv/bin/activate
+```
+#### 2.4 `FastAPI`のインストール
 ```
 pip install "fastapi[standard]"
 ```
-#### 2.4 サーバを起動する
+#### 2.5 サーバを起動する
 ```
 fastapi dev main.py
 ```
