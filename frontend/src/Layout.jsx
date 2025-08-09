@@ -4,10 +4,14 @@ import Header from "./Components/Header";
 function Layout() {
   return (
     <>
-      <Header title="よんだぶ" />
-      <main>
-        <Outlet />
-      </main>
+      <div
+        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+      >
+        <Header title="よんだぶ" />
+        <main style={{ flex: 1, minHeight: 0, overflow: "hidden" }}>
+          <Outlet />
+        </main>
+      </div>
     </>
   );
 }
