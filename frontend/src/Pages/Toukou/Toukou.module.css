@@ -1,0 +1,21 @@
+.forminputcontainer {
+  display: grid; /* Use grid instead of flex */
+  gap: 10px; /* 'gap' works for grid too */
+  width: 600px;
+}
+
+.forminputrow {
+  display: grid;
+  /* Define 3 columns: 
+     1. First label takes up only the space it needs.
+     2. The input field takes up the remaining flexible space.
+     3. The last label takes up only the space it needs.
+  */
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center; /* Vertically align items in the center of the row */
+  gap: 15px; /* Add some space between the label, input, and label */
+}
+
+.button {
+  margin-top: 20px;
+}
