@@ -5,18 +5,19 @@ html, body{
     height: 100%;
 }
 
-.container{
+.result{
+    display: flex;
+    margin: 0rem 10rem;
+    min-height: 65px;
+    border: 1px solid black;
+    /* top: -50%; */
+}
+
+/* .container{
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
+    gap: 4rem;
     transform: translateY(-8rem);
-}
-
-.contentGroup{
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-}
+} */
