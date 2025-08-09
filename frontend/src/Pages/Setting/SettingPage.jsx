@@ -1,6 +1,10 @@
 // src/pages/SettingPage.jsx
 import React, { useMemo, useState, useCallback, useRef } from "react";
 import "./SettingPage.css";
+import { Link } from "react-router"
+
+
+
 
 const LANG_DATA = {
   ja: {
@@ -52,6 +56,7 @@ const genId = () => Math.random().toString(36).slice(2) + Date.now().toString(36
 
 export default function SettingPage() {
   const [lang, setLang] = useState("ja");
+  const [paletteMode, setPaletteMode] = useState("flat"); // デフォルトはフラット
   const t = LANG_DATA[lang];
   const ui = t.ui;
 
@@ -63,8 +68,10 @@ export default function SettingPage() {
     [defaultElements, extraElements]
   );
 
-  // 文エリア（chipsは {id,text} で管理）
-  const toChipObjs = useCallback((labels) => labels.map((x) => ({ id: genId(), text: x })), []);
+  // 文エリア（chipsは {id,text}）
+  const toChipObjs = useCallback(
+    (labels) => labels.map((x) => ({ id: genId(), text: x })), []
+  );
   const [chips, setChips] = useState(() => toChipObjs(defaultElements));
 
   const sentenceRef = useRef(null);
@@ -75,8 +82,10 @@ export default function SettingPage() {
   }, [lang, toChipObjs]);
 
   const onAddCustom = useCallback(() => {
-    const label = lang === "ja" ? window.prompt("新しい要素名を入力") : window.prompt("Enter new element name");
-    if (label && label.trim()) setExtraElements((prev) => [...prev, label.trim()]);
+    const label =
+      lang === "ja" ? window.prompt("新しい要素名を入力") : window.prompt("Enter new element name");
+    if (label && label.trim())
+      setExtraElements((prev) => [...prev, label.trim()]);
   }, [lang]);
 
   const onClearPalette = useCallback(() => {
@@ -94,13 +103,17 @@ export default function SettingPage() {
     setChips((prev) => prev.filter((c) => c.id !== id));
   };
 
-  // パレットからのコピー開始
+  // パレットのドラッグ
   const onDragStartElement = (e, text) => {
+    e.currentTarget.classList.add("dragging");
     e.dataTransfer.setData("text/plain", text);
     e.dataTransfer.effectAllowed = "copy";
   };
+  const onDragEndElement = (e) => {
+    e.currentTarget.classList.remove("dragging");
+  };
 
-  // 既存チップ：移動開始/終了（DOMに直接 class を付け外し）
+  // 既存チップ：移動開始/終了
   const onDragStartChip = (e) => {
     e.currentTarget.classList.add("dragging");
     e.dataTransfer.setData("text/drag-id", e.currentTarget.dataset.id);
@@ -108,7 +121,6 @@ export default function SettingPage() {
   };
   const onDragEndChip = (e) => {
     e.currentTarget.classList.remove("dragging");
-    // 現在のDOM順をstateへ同期（HTML版と同じタイミング）
     const els = sentenceRef.current?.querySelectorAll(".chip");
     if (!els) return;
     const idOrder = Array.from(els).map((el) => el.getAttribute("data-id"));
@@ -118,7 +130,7 @@ export default function SettingPage() {
     });
   };
 
-  // HTML版と同じ：dragoverで「薄いプレビュー」を移動先に表示（DOMを直接並べ替える）
+  // 並べ替えプレビュー
   const getAfter = (container, x) => {
     const els = Array.from(container.querySelectorAll(".chip:not(.dragging)"));
     let best = { off: -Infinity, el: null };
@@ -147,7 +159,6 @@ export default function SettingPage() {
     e.preventDefault();
     const text = e.dataTransfer.getData("text/plain");
     if (text) {
-      // HTML版と同じ：パレット→ドロップ時に末尾へ追加
       setChips((prev) => [...prev, { id: genId(), text }]);
     }
   };
@@ -156,24 +167,34 @@ export default function SettingPage() {
   const exampleInputs = chips.map((c) => placeholders[c.text] || "");
 
   const onClickSave = () => {
-    console.log("SAVE (dummy) tokens:", chips.map((c) => c.text));
-    console.log("Example (dummy):", exampleInputs);
-    alert("UIダミー：保存処理は未接続です");
+
   };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <nav>
-        <div className="logo">{ui.title}</div>
-        <div className="controls">
-          <button onClick={onToggleLang}>{ui.langBtn}</button>
-          <button>{ui.roomCreate}</button>
-          <button>{ui.roomJoin}</button>
+      <header className="page-subheader" role="banner">
+        <div className="page-subheader__inner">
+          <span className="gear" aria-hidden>⚙️</span>
+          <h1>設定</h1>
+          <p className="desc">文の要素を並べ替えたり、例文を作成できます。</p>
+          <div className="toggle">
+            <span>パレット表示</span>
+            <button
+              className={paletteMode === "flat" ? "active" : ""}
+              onClick={() => setPaletteMode("flat")}
+              title="フラット（背景#f7f7f7・右ボーダーなし）"
+            >フラット</button>
+            <button
+              className={paletteMode === "soft" ? "active" : ""}
+              onClick={() => setPaletteMode("soft")}
+              title="カード寄り（白背景＋薄枠＋影）"
+            >カード</button>
+          </div>
         </div>
-      </nav>
+      </header>
 
       <div className="workspace">
-        <aside className="palette">
+        <aside className={`palette ${paletteMode === "soft" ? "softcard" : ""}`}>
           <h3 id="palette-title">{ui.palette}</h3>
           <div id="elements-list">
             {paletteItems.map((txt, i) => (
@@ -182,6 +203,7 @@ export default function SettingPage() {
                 className="element"
                 draggable
                 onDragStart={(e) => onDragStartElement(e, txt)}
+                onDragEnd={onDragEndElement}
                 title="ドラッグして文エリアへ"
               >
                 {txt}
@@ -191,7 +213,7 @@ export default function SettingPage() {
           <button id="add-custom-btn" style={{ marginTop: "1rem" }} onClick={onAddCustom}>
             {ui.addCustom}
           </button>
-          <button id="clear-btn" style={{ marginTop: ".5rem" }} onClick={onClearPalette}>
+          <button id="clear-btn" style={{ marginTop: ".1rem" }} onClick={onClearPalette}>
             {ui.clear}
           </button>
         </aside>
@@ -237,9 +259,12 @@ export default function SettingPage() {
       </div>
 
       <footer>
-        <button id="save-btn" onClick={onClickSave}>
-          {ui.save}
-        </button>
+        <Link to="/toukou">
+          <button id="save-btn" onClick={onClickSave}>
+            {ui.save}
+          </button>
+        </Link>
+
       </footer>
     </div>
   );
