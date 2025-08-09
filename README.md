@@ -8,7 +8,7 @@
 ### 1. リポジトリをクローンし、中に入る
 ```
 git clone https://github.com/oukoutdam/yondabu.git
-cd fastapi-react-number-setter
+cd yondabu
 ```
 ### 2. バックエンドを起動する
    
