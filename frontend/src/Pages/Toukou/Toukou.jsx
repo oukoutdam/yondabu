@@ -45,6 +45,7 @@ function Toukou() {
   }
 
   return (
+    <div className={styles.container}>
     <form onSubmit={handleSubmit}>
       <div className={styles.forminputcontainer}>
         <div className={styles.forminputrow}>
@@ -101,6 +102,7 @@ function Toukou() {
         投稿
       </button>
     </form>
+    </div>
   );
 }
 

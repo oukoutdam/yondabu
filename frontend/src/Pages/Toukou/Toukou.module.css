@@ -1,6 +1,6 @@
 .forminputcontainer {
   display: grid; /* Use grid instead of flex */
-  gap: 10px; /* 'gap' works for grid too */
+  gap: 20px; /* 'gap' works for grid too */
   width: 600px;
 }
 
@@ -17,5 +17,12 @@
 }
 
 .button {
-  margin-top: 20px;
+  margin: 2rem 15rem;
+}
+
+.container{
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
