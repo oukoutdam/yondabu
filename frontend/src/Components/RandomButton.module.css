@@ -1,23 +1,26 @@
-html, body, #root{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.RandomButton{
-    display: flex;
-    height: 3.5rem;
-    margin: 0rem 20rem;
-    justify-content: center;
-    align-items: center;
-    /* background: none; */
-    color: black;
-    font-size: 1.4rem;
-    background-color: #FFED22;
-    border: none;
+.RandomButton {
+  display: flex;
+  height: 3.5rem;
+  margin: 0rem 20rem;
+  justify-content: center;
+  align-items: center;
+  /* background: none; */
+  color: black;
+  font-size: 1.4rem;
+  background-color: #ffed22;
+  border: none;
+  text-decoration: none;
 }
 
-.RandomButton:hover{
-    background-color: #bdae0d;
+.RandomButton:hover {
+  background-color: #bdae0d;
 }
