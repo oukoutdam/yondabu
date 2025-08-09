@@ -1,0 +1,22 @@
+html, body{
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.container{
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.7rem;
+    transform: translateY(-2rem);
+}
+
+.contentGroup{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
