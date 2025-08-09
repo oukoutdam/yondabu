@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Toukou.module.css";
 
 const backend_url = import.meta.env.BACKEND_URL || "http://localhost:8000";
 
@@ -45,56 +46,60 @@ function Toukou() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="who">誰：</label>
-        <input
-          type="text"
-          id="who"
-          name="who"
-          value={whoData}
-          onChange={(e) => setWhoData(e.target.value)}
-          required
-        />
-        <label>が</label>
-      </div>
-      <div>
-        <label htmlFor="when">いつ：</label>
-        <input
-          type="text"
-          id="when"
-          name="when"
-          value={whenData}
-          onChange={(e) => setWhenData(e.target.value)}
-          required
-        />
-        <label>に</label>
-      </div>
-      <div>
-        <label htmlFor="where">どこ：</label>
-        <input
-          type="text"
-          id="where"
-          name="where"
-          value={whereData}
-          onChange={(e) => setWhereData(e.target.value)}
-          required
-        />
-        <label>で</label>
-      </div>
-      <div>
-        <label htmlFor="what">なにを：</label>
-        <input
-          type="text"
-          id="what"
-          name="what"
-          value={whatData}
-          onChange={(e) => setWhatData(e.target.value)}
-          required
-        />
-        <label>（した、する）</label>
+      <div className={styles.forminputcontainer}>
+        <div className={styles.forminputrow}>
+          <label htmlFor="who">誰：</label>
+          <input
+            type="text"
+            id="who"
+            name="who"
+            value={whoData}
+            onChange={(e) => setWhoData(e.target.value)}
+            required
+          />
+          <label>が</label>
+        </div>
+        <div className={styles.forminputrow}>
+          <label htmlFor="when">いつ：</label>
+          <input
+            type="text"
+            id="when"
+            name="when"
+            value={whenData}
+            onChange={(e) => setWhenData(e.target.value)}
+            required
+          />
+          <label>に</label>
+        </div>
+        <div className={styles.forminputrow}>
+          <label htmlFor="where">どこ：</label>
+          <input
+            type="text"
+            id="where"
+            name="where"
+            value={whereData}
+            onChange={(e) => setWhereData(e.target.value)}
+            required
+          />
+          <label>で</label>
+        </div>
+        <div className={styles.forminputrow}>
+          <label htmlFor="what">なにを：</label>
+          <input
+            type="text"
+            id="what"
+            name="what"
+            value={whatData}
+            onChange={(e) => setWhatData(e.target.value)}
+            required
+          />
+          <label>（した、する）</label>
+        </div>
       </div>
 
-      <button type="submit">投稿</button>
+      <button type="submit" className={styles.button}>
+        投稿
+      </button>
     </form>
   );
 }
