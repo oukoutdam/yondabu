@@ -1,14 +1,13 @@
-import './App.css'
-import { useEffect, useState, useCallback } from 'react'
+import "./App.css";
+import RankingTable from "./Components/RankingTable";
 
 function App() {
   return (
     <>
-      <div>
-        home
-      </div>
+      <div>home</div>
+      <RankingTable />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
