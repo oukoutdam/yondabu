@@ -1,14 +1,14 @@
-import style from "./RandomButton.module.css";
+import style from "./TouhyouKaishiButton.module.css";
 import { Link } from "react-router";
 
-export default function RandomButton({ onButtonClick }) {
+export default function TouhyouKaishiButton({ onButtonClick }) {
   return (
     <Link
       to={"/touhyou"}
       className={style.RandomButton}
       onClick={onButtonClick}
     >
-      ランダムな文を生成
+      投票開始
     </Link>
   );
 }

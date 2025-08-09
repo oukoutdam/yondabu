@@ -1,0 +1,32 @@
+.sentencebutton {
+  margin: 0;
+  padding: 6px 12px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    z-index 0ms;
+  will-change: transform;
+  white-space: nowrap;
+  outline: none;
+  z-index: 1; /* base z-index */
+}
+
+/* hover and keyboard focus state */
+.sentencebutton:hover,
+.sentencebutton:focus {
+  transform: scale(1.08); /* enlarge a bit */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  z-index: 9999; /* bring to front while hovered/focused */
+}
+
+/* keep focus visible for keyboard users */
+.sentencebutton:focus-visible {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.22),
+    0 0 0 3px rgba(0, 123, 255, 0.12);
+}

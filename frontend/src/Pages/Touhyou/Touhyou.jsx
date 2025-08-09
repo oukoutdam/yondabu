@@ -1,4 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
+import styles from "./Touhyou.module.css";
 
 // 表示する文章の配列
 const generatedSentences = [
@@ -131,6 +132,10 @@ function Touhyou() {
     return () => window.removeEventListener("resize", calculatePositions);
   }, []);
 
+  function handleClick(sentence) {
+    console.log(`Clicked on: ${sentence}`);
+  }
+
   return (
     <div
       ref={containerRef} // NEW: attach ref here
@@ -143,25 +148,24 @@ function Touhyou() {
       }}
     >
       {generatedSentences.map((sentence, index) => (
-        <p
-          key={sentence}
+        <button
+          key={`${sentence}-${index}`}
+          type="button"
+          aria-label={`Open details for ${sentence}`}
           ref={(el) => (sentenceRefs.current[index] = el)}
+          className={styles.sentencebutton}
+          onClick={() => handleClick(sentence)}
           style={{
             position: "absolute",
             left: positions[index] ? `${positions[index].left}px` : "-9999px",
             top: positions[index] ? `${positions[index].top}px` : "-9999px",
-            margin: 0,
-            padding: "5px 10px",
-            backgroundColor: "white",
-            borderRadius: "8px",
-            boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
             visibility: positions.length > 0 ? "visible" : "hidden",
-            transition: "opacity 0.5s ease-in-out",
             opacity: positions.length > 0 ? 1 : 0,
+            margin: 0,
           }}
         >
           {sentence}
-        </p>
+        </button>
       ))}
     </div>
   );

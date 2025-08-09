@@ -1,10 +1,9 @@
-
-import {useState} from 'react'
-import Result from  "./Components/Result"
-import Button from "./Components/RandomButton"
-import Toukou from "./Components/toukou"
+import { useState } from "react";
+import Result from "./Components/Result";
+import Toukou from "./Components/toukou";
 import RankingTable from "./Components/RankingTable";
-import "./App.css"
+import "./App.css";
+import TouhyouKaishiButton from "./Components/TouhyouKaishiButton";
 
 function App() {
   return (
@@ -12,10 +11,10 @@ function App() {
       <div className="container">
         <div className="contentGroup">
           <Result />
-          <Button />
+          <TouhyouKaishiButton />
         </div>
-          <Toukou />
-          <RankingTable />
+        <Toukou />
+        <RankingTable />
       </div>
     </>
   );
