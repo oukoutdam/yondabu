@@ -1,36 +1,47 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from number_store import NumberStore
-from schemas import SetNumberRequest
+from schemas import CreateStructureReq, PostSubmissionReq
+from sheet_store import SheetStore
 
-STORED_NUMBER = None
+app = FastAPI(title="When/Where/Who/What Game API")
+store = SheetStore()
 
-app = FastAPI()
-number_store = NumberStore()
-
-origins = [
-    "http://localhost:5173",
-]
-
+# フロントを載せるオリジンに合わせて変更可
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+@app.get("/health")
+def health():
+    return {"ok": True}
+
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+def root():
+    return {"ok": True, "service": "when-where-who-what"}
 
-@app.get("/number")
-def get_number():
-    number = number_store.get_number()
-    return {"number" : number}
+# 先生：構造＋例文（任意）を設定。既存投稿＆生成はクリア。
+@app.post("/structures")
+def set_structure(req: CreateStructureReq):
+    store.set_active_structure(req.title, req.tokens, req.exampleSentence)
+    return {"ok": True}
 
-@app.post("/number")
-def set_number(request: SetNumberRequest):
-    number_store.set_number(request.number)
-    return {"message": "Number set successfully", "number": number_store.get_number()}
+# 生徒：1投稿＝1行（tokens と同じ数の values を送る）
+@app.post("/submissions")
+def post_submission(req: PostSubmissionReq):
+    try:
+        store.add_submission_row(req.values, req.userId or "")
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True}
 
+# ランダム生成：各列からランダム抽選→連結。generated にも保存。
+@app.get("/random-sentence")
+def random_sentence():
+    try:
+        return store.make_random_sentence_from_columns()
+    except ValueError as e:
+        raise HTTPException(400, str(e))
