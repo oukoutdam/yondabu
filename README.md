@@ -31,7 +31,7 @@ source .venv/bin/activate
 ```
 #### 2.4 `FastAPI`のインストール
 ```
-pip install "fastapi[standard]"
+pip install -r requirements.txt
 ```
 #### 2.5 サーバを起動する
 ```
