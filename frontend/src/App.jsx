@@ -15,8 +15,8 @@ function App() {
           <Button />
         </div>
           <Toukou />
+          <RankingTable />
       </div>
-    <RankingTable />
     </>
   );
 }

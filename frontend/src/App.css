@@ -6,17 +6,17 @@ html, body{
 }
 
 .container{
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2.5rem;
-    transform: translateY(-8rem);
+    gap: 2.7rem;
+    transform: translateY(-2rem);
 }
 
 .contentGroup{
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 3rem;
 }

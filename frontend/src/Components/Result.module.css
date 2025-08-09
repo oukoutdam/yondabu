@@ -7,17 +7,8 @@ html, body{
 
 .result{
     display: flex;
-    margin: 0rem 10rem;
-    min-height: 65px;
+    margin: 0rem 7rem;
+    margin-top: 10rem;
+    min-height: 5rem;
     border: 1px solid black;
-    /* top: -50%; */
 }
-
-/* .container{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4rem;
-    transform: translateY(-8rem);
-} */

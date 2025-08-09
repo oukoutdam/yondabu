@@ -13,7 +13,11 @@ html, body, #root{
     align-items: center;
     /* background: none; */
     color: black;
-    font-size: 1.5rem;
-    background-color: yellow;
+    font-size: 1.4rem;
+    background-color: #FFED22;
     border: none;
+}
+
+.RandomButton:hover{
+    background-color: #bdae0d;
 }
