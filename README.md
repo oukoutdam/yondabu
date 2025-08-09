@@ -7,7 +7,7 @@
 ## 開発環境の実行手順
 ### 1. リポジトリをクローンし、中に入る
 ```
-git clone https://github.com/oukoutdam/fastapi-react-number-setter.git
+git clone https://github.com/oukoutdam/yondabu.git
 cd fastapi-react-number-setter
 ```
 ### 2. バックエンドを起動する
