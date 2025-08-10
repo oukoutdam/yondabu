@@ -8,7 +8,7 @@ export default function Home(){
     const handleClick = () => {
     //text更新
     //ここに抽選結果をいれる
-        setText('a');
+        setText('');
     }
     return (
         <>
