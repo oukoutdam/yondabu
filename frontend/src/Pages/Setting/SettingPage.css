@@ -35,7 +35,7 @@ footer button{margin-left:.5rem} */
 
 *{box-sizing:border-box}
 :root{color-scheme:light}
-body{
+body.setting-body{
   margin:0;
   font-family:sans-serif;
   background:#f5f5f5;

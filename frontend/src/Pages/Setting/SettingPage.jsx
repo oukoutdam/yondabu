@@ -2,6 +2,7 @@
 import React, { useMemo, useState, useCallback, useRef } from "react";
 import "./SettingPage.css";
 import { Link } from "react-router"
+import { useEffect } from "react";
 
 
 
@@ -55,6 +56,11 @@ const LANG_DATA = {
 const genId = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 export default function SettingPage() {
+  useEffect(() => {
+    document.body.classList.add("setting-body");
+    return () => document.body.classList.remove("setting-body"); // 離脱時に解除
+  }, []);
+
   const [lang, setLang] = useState("ja");
   const [paletteMode, setPaletteMode] = useState("flat"); // デフォルトはフラット
   const t = LANG_DATA[lang];
