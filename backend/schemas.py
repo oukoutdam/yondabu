@@ -8,6 +8,7 @@ class CreateStructureReq(BaseModel):
     exampleSentence: Optional[List[str]] = Field(None, example=["昨日","地球で","猫が","酒を飲んだ"])
 
 class PostSubmissionReq(BaseModel):
+    userId: Optional[str] = Field(None, example="student1")
     values: list[str] = Field(..., min_length=1, example=["昨日","部屋で","私が","倒立した"])
 
 class SignUpReq(BaseModel):
