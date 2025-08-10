@@ -2,8 +2,8 @@ import { useState } from "react";
 import Result from "./Components/Result";
 import KakuteiButton from "./Components/KakuteiButton";
 import Button from "./Components/RandomButton";
-import Toukou from "./Pages/Toukou/Toukou";
 import RankingTable from "./Components/RankingTable";
+import Toukou from "./Components/Toukou";
 import { BACKEND_URL } from "./config";
 import "./App.css";
 
