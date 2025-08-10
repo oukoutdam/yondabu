@@ -13,7 +13,8 @@ createRoot(document.getElementById("root")).render(
         <Route element={<Layout />}>
           <Route index element={<App />} />
           <Route path="toukou" element={<Toukou />} />
-          <Route path="about" element={<div>About Page</div>} />
+          <Route path="private" element={<div>Private Page</div>} />
+          <Route path="vote" element={<div>Vote Page</div>} />
         </Route>
       </Routes>
     </BrowserRouter>
