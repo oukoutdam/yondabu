@@ -32,7 +32,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background-color: yellow;
+  background-color: rgb(255, 255, 0);
   color: black;
   z-index: 1000;
   /* font-size: 20px; */

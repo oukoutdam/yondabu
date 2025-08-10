@@ -9,7 +9,7 @@ export default function Header({ title }) {
     };
 
     return (
-    <div className={`${styles.pageContent} ${isOpen ? styles.shifted : ''}`}>
+    // <div className={`${styles.pageContent} ${isOpen ? styles.shifted : ''}`}>
         <header className={styles.header}>
             <div className={styles.left}>
                 <button className={styles.button} onClick={toggleMenu}>
@@ -28,6 +28,6 @@ export default function Header({ title }) {
               {/* <Link to="/contact" className={styles.menuLink}></Link> */}
             </nav>
         </header>
-    </div>
+    // </div>
     );
 }

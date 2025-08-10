@@ -75,7 +75,7 @@ function App() {
         <div className="contentGroup">
           <Result text={generatedSentence} />
           <div
-            style={{ display: "flex", justifyContent: "center", gap: "2rem" }}
+            style={{ display: "flex", justifyContent: "center", gap: "1rem" }}
           >
             <KakuteiButton
               handleClick={handleKakutei}
