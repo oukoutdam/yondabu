@@ -25,7 +25,7 @@ function App() {
 
   async function fetchGeneratedSentence() {
     try {
-      const response = fetch(`${BACKEND_URL}/random-sentence`);
+      const response = await fetch(`${BACKEND_URL}/random-sentence`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
