@@ -212,35 +212,28 @@ class SheetStore:
         return items[:limit]
 
     # ---------- いいね（同一ユーザーは1回だけ） ----------
-    def like_sentence(self, post_id: str, user_id: str) -> Dict[str, Any]:
-        # 既存チェック（O(n)だが件数少ならOK）
-        rows = _values_get("likes!A2:C") or []
-        for r in rows:
-            if len(r) >= 2 and r[0] == post_id and r[1] == user_id:
-                return {"ok": True, "duplicated": True}
-        _write_q.put(("likes!A:C", [post_id, user_id, dt.datetime.utcnow().isoformat()]))
-        return {"ok": True, "duplicated": False}
-
-    # ---------- 週間ランキング（直近7日） ----------
-    def weekly_top(self, limit: int = 5) -> List[Dict[str, Any]]:
-        cutoff = dt.datetime.utcnow() - dt.timedelta(days=7)
+    def weekly_top(self, limit: int = 5) -> list[dict]:
+        # 全期間でカウント（時刻パースなし）
         likes = _values_get("likes!A2:C") or []
-        counts: Dict[str, int] = {}
+        counts: dict[str, int] = {}
         for r in likes:
-            if len(r) >= 3 and r[2]:
-                try:
-                    if dt.datetime.fromisoformat(r[2]) >= cutoff:
-                        counts[r[0]] = counts.get(r[0], 0) + 1
-                except Exception:
-                    pass
-        if not counts: return []
-        # sentence_id -> sentence
-        gen_map: Dict[str, str] = {}
+            if len(r) >= 2 and r[0]:
+                counts[r[0]] = counts.get(r[0], 0) + 1
+
+        if not counts:
+            return []
+
+        # sentence_id -> sentence へ解決
+        gen_map: dict[str, str] = {}
         for g in self.list_posts(limit=10_000, order="asc"):
-            gen_map[g["id"]] = g["sentence"]
+            gen_map[g["id"]] = g.get("sentence", "")
+
         ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:limit]
-        
-        return [{"sentence_id": sid, "sentence": gen_map.get(sid, ""), "likes": cnt} for sid, cnt in ranked]
+        return [
+            {"sentence_id": sid, "sentence": gen_map.get(sid, ""), "likes": cnt}
+            for sid, cnt in ranked
+        ]
+
 
     # ---------- Users ----------
     def read_users(self) -> list[dict]:
