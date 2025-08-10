@@ -8,12 +8,11 @@ export default function Home(){
     const handleClick = () => {
     //text更新
     //ここに抽選結果をいれる
-        setText('');
+        setText('a');
     }
-
     return (
         <>
-            <h1 className={style.result}>{text}</h1>
+            <h1 className={style.result} onClick={handleClick}>{text}</h1>
         </>
     )
 }
