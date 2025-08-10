@@ -8,7 +8,7 @@ function Layout() {
         style={{ display: "flex", flexDirection: "column", height: "100vh" }}
       >
         <Header title="よんだぶ" />
-        <main style={{ flex: 1, minHeight: 0, overflow: "hidden" }}>
+        <main style={{ flex: 1, minHeight: 0 }}>
           <Outlet />
         </main>
       </div>
