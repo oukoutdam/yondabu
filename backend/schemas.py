@@ -15,7 +15,7 @@ class CreateStructureReq(BaseModel):
 
 class PostSubmissionReq(BaseModel):
     # tokens と同じ長さの配列を送る（1投稿＝1行）
-    values: conlist(str, min_items=1) = Field(
+    values: conlist(str, min_length=1) = Field(
         ...,
         example=["昨日", "地球で", "猫が", "酒を飲んだ"]
     )
