@@ -137,7 +137,7 @@ class SheetStore:
         sentence_id = "sen_" + uuid.uuid4().hex[:10]
         sentence = " ".join(words)
         _write_q.put(("generated!A:D", [sentence_id, sentence, json.dumps(used), dt.datetime.utcnow().isoformat()]))
-        return {"id": sentence_id, "sentence": sentence, "parts": used}
+        return {"id": sentence_id, "values": used}
 
     # ---------- 生成済み一覧 ----------
     def list_generated(self, limit: int = 100, order: str = "desc") -> List[Dict[str, Any]]:
@@ -212,6 +212,15 @@ class SheetStore:
         return items[:limit]
 
     # ---------- いいね（同一ユーザーは1回だけ） ----------
+    def like_sentence(self, post_id: str, user_id: str) -> Dict[str, Any]:
+        # 既存チェック（O(n)だが件数少ならOK）
+        rows = _values_get("likes!A2:C") or []
+        for r in rows:
+            if len(r) >= 2 and r[0] == post_id and r[1] == user_id:
+                return {"ok": True, "duplicated": True}
+        _write_q.put(("likes!A:C", [post_id, user_id, dt.datetime.utcnow().isoformat()]))
+        return {"ok": True, "duplicated": False}
+    
     def weekly_top(self, limit: int = 5) -> list[dict]:
         # 全期間でカウント（時刻パースなし）
         likes = _values_get("likes!A2:C") or []
@@ -229,11 +238,11 @@ class SheetStore:
             gen_map[g["id"]] = g.get("sentence", "")
 
         ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:limit]
+
         return [
-            {"sentence_id": sid, "sentence": gen_map.get(sid, ""), "likes": cnt}
+            {"values": gen_map.get(sid, "").split(), "likes": cnt}
             for sid, cnt in ranked
         ]
-
 
     # ---------- Users ----------
     def read_users(self) -> list[dict]:
