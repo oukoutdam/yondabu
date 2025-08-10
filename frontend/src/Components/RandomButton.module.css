@@ -10,7 +10,6 @@ body,
 .RandomButton {
   display: flex;
   height: 3.5rem;
-  margin: 0rem 20rem;
   justify-content: center;
   align-items: center;
   /* background: none; */
