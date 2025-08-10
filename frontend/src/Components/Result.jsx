@@ -2,13 +2,13 @@ import style from "./Result.module.css"
 import { useState } from "react";
 
 
-export default function Home(){
+export default function Result(){
     const [text, setText] = useState('');
 
     const handleClick = () => {
     //text更新
     //ここに抽選結果をいれる
-        setText('a');
+        setText('');
     }
     return (
         <>

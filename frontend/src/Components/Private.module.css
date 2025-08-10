@@ -1,9 +1,11 @@
-html, body {
+/* html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow: hidden;
-}
+    height: 100%;
+    overflow: hidden; 
+}*/
+
 .title{
     display: flex;
     height: 20rem;
@@ -27,9 +29,9 @@ html, body {
     align-items: center;
 }
 
-th, td {
+/* th, td {
     text-align: center;
     font-size: 2rem;
     padding: 1rem;
     border: 1px solid #ddd;
-}
+} */

@@ -11,34 +11,34 @@
 
 .borderedtable th,
 .borderedtable td {
-  border: 1px solid #000000;
-  padding: 8px;
+  border: 0.1rem solid #000000;
+  padding: 0.5rem;
 }
 
 .tablerow {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 8px;
+  padding: 0.5rem;
   justify-content: space-between;
-  gap: 90px;
+  gap: 0.5rem;
 }
 
 .rowprefix {
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .icons {
-  height: 24px;
-  width: 24px;
+  height: 3rem;
+  width: 3rem;
 }
 
 .votecount {
-  border: 1px solid #000;
+  border: 0.1rem solid #000;
   text-align: center;
-  width: 40px;
-  height: 20px;
+  width: 2rem;
+  height: 1.5rem;
   background-color: #fffdc2;
 }
