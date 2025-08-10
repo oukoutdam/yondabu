@@ -58,7 +58,7 @@ def like(post_id: str, user=Depends(get_current_user)):
     return store.like_sentence(post_id, user["id"])
 
 # ⑥ 週間ランキング（直近7日）上位5
-@app.get("/ranking/weekly")
+@app.get("/ranking")
 def weekly_top(limit: int = 5):
     return store.weekly_top(limit=limit)
 
