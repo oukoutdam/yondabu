@@ -15,7 +15,7 @@ function App() {
 
   function createSentence(data) {
     const [when, where, who, what] = data.values;
-    return `${when}に${where}で${who}が${what}`;
+    return `${when}${where}${who}${what}`;
   }
 
   function resetState() {

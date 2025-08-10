@@ -91,6 +91,7 @@ const fakeRankingData = [
 
 function RankingTable() {
   const [rankingData, setRankingData] = useState([]);
+
   const rankingIconList = [ranking1Icon, ranking2Icon, ranking3Icon];
 
   useEffect(() => {
@@ -103,6 +104,7 @@ function RankingTable() {
         }
 
         const data = await response.json();
+        console.log(data);
         setRankingData(data);
       } catch (error) {
         console.error("Error fetching ranking data:", error);
@@ -136,7 +138,7 @@ function RankingTable() {
         <tbody>
           {rankingData.map((item, index) => {
             return (
-              <tr key={item.id}>
+              <tr key={index}>
                 <td className={styles.tablerow}>
                   <div className={styles.rowprefix}>
                     <div>
@@ -151,11 +153,13 @@ function RankingTable() {
                       )}
                     </div>
                     <div>
-                      <strong>{item.who}</strong>が<span>{item.when}</span>に
-                      <span>{item.where}</span>で<span>{item.what}</span>
+                      <strong>{item.values[2]}</strong>
+                      <span>{item.values[0]}</span>
+                      <span>{item.values[1]}</span>
+                      <span>{item.values[3]}</span>
                     </div>
                   </div>
-                  <div className={styles.votecount}>{item.voteCount}</div>
+                  <div className={styles.votecount}>{item.likes}</div>
                 </td>
               </tr>
             );

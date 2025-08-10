@@ -63,7 +63,7 @@ function Toukou() {
               onChange={(e) => setWhoData(e.target.value)}
               required
             />
-            <label>が</label>
+            <label>例:私が</label>
           </div>
           <div className={styles.forminputrow}>
             <label htmlFor="when">いつ：</label>
@@ -75,7 +75,7 @@ function Toukou() {
               onChange={(e) => setWhenData(e.target.value)}
               required
             />
-            <label>に</label>
+            <label>例:明日に</label>
           </div>
           <div className={styles.forminputrow}>
             <label htmlFor="where">どこ：</label>
@@ -87,7 +87,7 @@ function Toukou() {
               onChange={(e) => setWhereData(e.target.value)}
               required
             />
-            <label>で</label>
+            <label>例：学校へ</label>
           </div>
           <div className={styles.forminputrow}>
             <label htmlFor="what">なにを：</label>
@@ -99,7 +99,7 @@ function Toukou() {
               onChange={(e) => setWhatData(e.target.value)}
               required
             />
-            <label>（した、する）</label>
+            <label>例：行きます</label>
           </div>
         </div>
 

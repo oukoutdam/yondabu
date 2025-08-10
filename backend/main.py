@@ -24,9 +24,9 @@ def set_structure(req: CreateStructureReq):
 
 # ① 入力をtokens単位で保存（認証ユーザーを付与）
 @app.post("/submissions")
-def post_submission(req: PostSubmissionReq, user=Depends(get_current_user)):
+def post_submission(req: PostSubmissionReq):
     try:
-        store.add_submission_row(req.values, user["id"])
+        store.add_submission_row(req.values, "user123")
     except ValueError as e:
         raise HTTPException(400, str(e))
     return {"ok": True}
@@ -41,9 +41,9 @@ def random_sentence():
 
 # ③ 「投稿」ボタン：生成文を posted に列ごと保存（認証必要）
 @app.post("/publish/{sentence_id}")
-def publish(sentence_id: str, user=Depends(get_current_user)):
+def publish(sentence_id: str):
     try:
-        return store.publish_sentence(sentence_id, user["id"])
+        return store.publish_sentence(sentence_id, "user123")
     except ValueError as e:
         raise HTTPException(400, str(e))
 
