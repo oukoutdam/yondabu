@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import Layout from "./Layout.jsx";
 import Toukou from "./Pages/Toukou/Toukou.jsx";
 import Private from "./Components/Private.jsx";
+import SettingPage from "./Pages/Setting/SettingPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="toukou" element={<Toukou />} />
           <Route path="private" element={<Private/>} />
           <Route path="vote" element={<div>Vote Page</div>} />
+          <Route path="/setting-page" element={<SettingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
